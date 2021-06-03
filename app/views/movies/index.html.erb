@@ -1,0 +1,19 @@
+<div class="movie-info">
+
+  <% @movies.each do |movie| %>
+    <div class="col-md-4">
+      <h3><%= movie.title %></h3>
+      <ul>
+          <li><%= movie.rating %>,  <%= movie.movie_length %> minutes</li>
+        <% movie.showing_times.each do |show| %>
+            <%= show.start_time.strftime("Starting at %I:%M%p") %>
+            <% if show.seats_purchased == show.screen.seat_capacity %>
+              Sold Out
+            <% else %>
+              <%= link_to "Buy Ticket", new_purchase_path(show.id)%>
+            <% end %>
+        <% end %>
+      </ul>
+      </div> 
+    <% end %>
+</div>  
